@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="img/favicon_Jwiki.ico" type="image/x-icon">
         <title>JWiki</title>
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/Estilos.css">
@@ -136,10 +137,10 @@
        <footer class="footer">
            <div class="container footer__grid">
                <nav class="nav nav--footer">
-                <a class="nav__items nav__items--footer" href="">Inicio</a>
+                <a class="nav__items nav__items--footer" href="index.php">Inicio</a>
                 <!-- <a class="nav__items nav__items--footer" href="">Contacto</a>
                 <a class="nav__items nav__items--footer" href="">Tabla de infectados</a> -->
-                <a class="nav__items nav__items--footer" href="">Registrarse</a>
+                <a class="nav__items nav__items--footer" href="register.php">Registrarse</a>
                </nav>
 
                <section class="footer__contact">

@@ -1,8 +1,27 @@
 <?php
-/*session_start();
-if(isset($_SESSION['nombre'])){
-  header('location:php/bienvenido.php');
-}*/
+include("admin-JWiki/assets/conexion/conexion.php");
+session_start();
+if(isset($_SESSION['idusuario'])){
+header("Location:admin-JWiki/assets/bienvenido.php");
+}
+if(!empty($_POST)){
+$usuario = mysqli_real_escape_string($conexion,$_POST['usuario']);
+$contrasena = mysqli_real_escape_string($conexion,$_POST['contrasena']);
+$contrasena_encriptada=sha1($contrasena);
+$sql= "SELECT idusuario,idrol FROM usuario WHERE usuario='$usuario'  AND contrasena='$contrasena_encriptada'";
+$resultado=$conexion->query($sql);
+$fila=$resultado->num_rows; //verificar si obtuvo registros
+if($fila>0){
+$fila=$resultado->fetch_assoc(); 
+$_SESSION['idusuario']=$fila['idusuario'];
+$_SESSION['idrol']=$fila['idrol'];
+header('Location:admin-JWiki/assets/bienvenido.php');
+}else{
+echo "<script>
+alert('Usuario o contraseña incorrectos');
+window.location='login.php';</script>";
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -26,7 +45,7 @@ if(isset($_SESSION['nombre'])){
     <header class="contenedor header">
 
         <div class="container">
-            <form class="box-form" action="php/loginProceso.php" method="POST">
+            <form class="box-form" action="<?php $_SERVER["PHP_SELF"];?>" method="POST">
           
               <div class="box-title">
                 <h2>Iniciar Sesi&oacute;n</h2>
@@ -35,8 +54,8 @@ if(isset($_SESSION['nombre'])){
               <div class="box-inputs">
           
                 <div class="inputs-email">
-                  <input type="email" name="email" id="email" class="input" placeholder="Type your e-mail">
-                  <label for="email" class="label-inputs">E-mail:</label>
+                  <input type="text" name="usuario" id="usuario" class="input" >
+                  <label for="email" class="label-inputs">Usuario:</label>
                 </div>
           
                 <div class="inputs-password">
@@ -44,18 +63,12 @@ if(isset($_SESSION['nombre'])){
                   <label for="password" class="label-inputs">Contraseña:</label>
                 </div>
           
-                <div class="inputs-remember">
-                  <input type="checkbox" name="remember" id="remember" checked>
-                  <label for="remember">Recuerdame</label>
-                </div>
-          
                 <div class="box-btn-login">
-                  <button class="btn-login" type="submit" value="enter">Entrar</button>
+                  <button class="btn-login" name="ingresar" type="submit" value="enter">Entrar</button>
                 </div>
               </div>
           
               <div class="box-register">
-                <p>¿Olvidaste tu contraseña? <a href="#">Da click aqui</a></p>
                 <p>¿Aun no tienes una cuenta? <a href="register.php">Crea una</a></p>
                 <center><p><a href="index.php">Regresar al Inicio</a></p></center>
               </div>

@@ -75,7 +75,7 @@ $niveles = $sentencia->fetchAll(PDO::FETCH_OBJ);
                     <a href="login.php" class="download">Iniciar sesi&oacute;n</a>
                 </li>
                 <li>
-                    <a href="#" class="article">Cómo Colaborar</a>
+                    <a href="colaboracion.php" class="article">Cómo Colaborar</a>
                 </li>
             </ul>
         </nav>

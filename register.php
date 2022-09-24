@@ -1,9 +1,44 @@
-<!-- <?php
+ <?php
 // session_start();
 // if(isset($_SESSION['usuario'])){
 // header("location: php/bienvenido.php");
 // }   /*al iniciar sesion desde login manda a esa direccion "bienvenido.php"*/
-?> -->
+include('admin-Jwiki/assets/conexion/conexion.php');
+$sql="SELECT idrol,rol FROM rol WHERE idrol=2";
+$resultado=$conexion->query($sql);
+if(!empty($_POST)){
+    $nombreR = mysqli_real_escape_string($conexion,$_POST['nombreR']);
+    $apellidos = mysqli_real_escape_string($conexion,$_POST['apellidos']);
+    $email = mysqli_real_escape_string($conexion,$_POST['email']);
+    $profesion = mysqli_real_escape_string($conexion,$_POST['profesion']);
+    $usuario = mysqli_real_escape_string($conexion,$_POST['usuario']);
+    $rolusuario =$_POST['tipo_rol'];
+    $contrasena = mysqli_real_escape_string($conexion,$_POST['contrasena']);
+    $contrasena_encriptada=sha1($contrasena);
+
+    $sqlusuario= "SELECT idusuario FROM usuario WHERE usuario='$usuario'";
+    $resultadousuario = $conexion->query($sqlusuario);
+    $filas = $resultadousuario->num_rows;
+    if ($filas>0) {
+echo "<script>
+alert('El usuario ya existe');
+window.location='register.php';</script>";
+    }else{
+        $sqlusuario2 = "INSERT INTO usuario(usuario,contrasena,idrol,nombreR,apellidos,email,profesion) VALUES ('$usuario','$contrasena_encriptada','$rolusuario','$nombreR','$apellidos','$email','$profesion')";
+         $resultadouser=$conexion->query($sqlusuario2);
+         
+        if ($resultadouser>0) {
+            echo "<script>
+alert('Registro exitoso');
+window.location='login.php';</script>";
+        }else{
+            echo "<script>
+alert('Error al registrarse');
+window.location='register.php';</script>";
+        }
+    }
+}
+?> 
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,7 +47,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Registrarse</title>
     <!-- Estilos CSS --> 
-    <link rel="stylesheet" href="./css/estilos_register.css">
+    <link rel="stylesheet" href="css/estilos_register.css">
         <!-- Fuentes -->
        
     <script src="https://kit.fontawesome.com/2a8c4fb58f.js" crossorigin="anonymous"></script>    
@@ -25,7 +60,8 @@
     <header class="contenedor header">
 
         <div class="container">
-            <form class="box-form" action="php/registrousuario.php" method="POST">
+          <!-- action= php/registrousuario.php -->
+            <form class="box-form" action="<?php $_SERVER["PHP_SELF"]?>" method="POST">
           
               <div class="box-title">
                 <h2>Registrarse</h2>
@@ -44,7 +80,7 @@
                 </div>
 
                 <div class="inputs-nombre">
-                    <input type="nombre" name="nombre" id="nombre" class="input" placeholder="Type your nombre">
+                    <input type="nombre" name="nombreR" id="nombre" class="input" placeholder="Type your nombre">
                     <label for="nombre" class="label-inputs">Nombre:</label>
                   </div>
                  
@@ -63,12 +99,22 @@
                   <label for="password" class="label-inputs">Password:</label>
                 </div>
                 
+  <br>
 
-                <div class="inputs-remember">
-                  <input type="checkbox" name="remember" id="remember" checked>
-                  <label for="remember">Recuerdame</label>
-                </div>
-          
+<label for="TipoUser"></label>
+               <select class="form-control"id="TipoUser"name="tipo_rol">
+              
+              <?php
+              while ($fila=$resultado->fetch_assoc()) {?> 
+  <option value="<?php echo $fila['idrol'] ?>"><?php echo $fila['rol']  ?></option>
+                <?php
+                }
+             
+              ?>
+               </select>
+                
+            <br> 
+          <br>
                 <div class="box-btn-login">
                   <button class="btn-login" type="submit" value="enter">Entrar</button>
                 </div>
