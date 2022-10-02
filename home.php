@@ -254,7 +254,7 @@ $niveles = $sentencia->fetchAll(PDO::FETCH_OBJ);
               <br>
              <h7> Y recuerda que si puedes imaginarlo puedes programarlo...</h7>
             </p>
-            <center> <img src="img/giftBienvenida.gif" alt="" class="img-fluid center"></center>
+            <center> <img src="img/giftbienvenida2.gif" alt="" class="img-fluid center"></center>
             <br>
            
             <?php 

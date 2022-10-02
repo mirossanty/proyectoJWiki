@@ -313,10 +313,24 @@ $row=$resultado->fetch_assoc();//array asociativo
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper site-min-height">
-          	<h3><i class="fa fa-angle-right"></i> Blank Page</h3>
+          	<h3><i class="fa fa-angle-right"></i> !Bienvenido a JWiki!</h3>
           	<div class="row mt">
           		<div class="col-lg-12">
-          		<p>Place your content here.</p>
+                  <div class="form-panel">
+                  	  <h4 class="mb"><i class="fa fa-angle-right"></i>De parte del equipo JWiki...</h4>
+                        <p>Te damos la bienvenida a JWiki. En esta sección de JWiki podrás agregar la información que como colaborador tienes derecho de aportar.</p>
+                  <p>En la sección de la derecha encontrarás las diferentes opciones para agregar información, desde párrafos a un tema de tu elección, hasta código de ejemplo que será un gran aporte para los visitantes a la wiki y nuestros colaboradores.Ten en cuenta que todos podemos poner nuestro granito de arena para construir y alimentar la wiki, pero hazlo con responsabilidad para ayudar a todos los lectores.</p><br>
+                 <b>Notas de los creadores de JWiki</b> 
+                 <p>
+                        <ol>
+                                <li>En las secciones de párrafo,subtema y subparrafo está la opción de colocar el número de posición en el que queremos colocar ya sea el párrafo, subtema o subparrafo; sin embargo hay que tomar en cuenta que si la posición que elijas como colaborador esta ocupada, se colocará tu contenido en el siguiente lugar disponible. Por ejemplo si elijes la 1 y se encuentra ocupada, se colocara en el dos si se encuentra libre.</li>
+                                <li>Para colocar el link en la sección de vídeos, te sugerimos subir tu ejemplo a youtube y seguido de esto, colocar el link que se genera cuando se coloca la opcion de compartir e incrustrar como html<></li>
+                                
+                        </ol>
+                 </p>
+                 <center> <img src="img/giftbienvenida.gif" alt="" class="img-fluid center"></center>
+            <br>
+                     </div>
           		</div>
           	</div>
 			
