@@ -9,6 +9,32 @@ $iduser=$_SESSION['idusuario'];
 $sql="SELECT usuario,nombreR FROM usuario WHERE idusuario='$iduser'";
 $resultado=$conexion->query($sql);
 $row=$resultado->fetch_assoc();//array asociativo
+
+//$sql="SELECT idrol,rol FROM rol";
+$sql="SELECT idtema,tema FROM tema";
+$resultado=$conexion->query($sql);
+ if(!empty($_POST)){
+         $temas = mysqli_real_escape_string($conexion,$_POST['temas']);
+         $parrafo = mysqli_real_escape_string($conexion,$_POST['parrafo']);
+         $no_parrafo = mysqli_real_escape_string($conexion,$_POST['no_parrafo']);
+         $sqlparrafo = "INSERT INTO parrafo(parrafo,idtema,no_parrafo) VALUES ('$parrafo','$temas','$no_parrafo')";
+         $resultadoparrafo=$conexion->query($sqlparrafo);
+
+         $referencias = mysqli_real_escape_string($conexion,$_POST['referencias']);
+         $sqlrefer = "INSERT INTO referencia(referencia,idtema) VALUES ('$referencias','$temas')";
+         $resultadorefer=$conexion->query($sqlrefer);
+
+         if ($resultadoparrafo>0) {
+             echo "<script>
+ alert('Registro de parrafo exitoso');
+ window.location='agregarParrafo.php';</script>";
+         }else{
+             echo "<script>
+ alert('Error al registrar párrafo');
+ window.location='agregarParrafo.php';</script>";
+         }
+     }
+ 
 ?>
 
 <!DOCTYPE html>
@@ -299,8 +325,6 @@ $row=$resultado->fetch_assoc();//array asociativo
                         
                       </ul>
                   </li>
-                 
-
               </ul>
               <!-- sidebar menu end-->
           </div>
@@ -313,12 +337,56 @@ $row=$resultado->fetch_assoc();//array asociativo
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper site-min-height">
-          	<h3><i class="fa fa-angle-right"></i> Blank Page</h3>
-          	<div class="row mt">
+          	<h3><i class="fa fa-angle-right"></i>Agrega información a un tema de tu preferencia </h3>
+              <div class="row mt">
           		<div class="col-lg-12">
-          		<p>Place your content here.</p>
-          		</div>
-          	</div>
+                  <div class="form-panel">
+                  	  <h4 class="mb"><i class="fa fa-angle-right"></i>Ingresar párrafo</h4>
+                      <form class="form-horizontal style-form" method="post">
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Párrafo</label>
+                              <div class="col-sm-8">
+                                  <!-- <input type="text" name="parrafo" class="form-control" required> -->
+                                  <textarea class="form-control"name="parrafo" aria-label="With textarea" required></textarea>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Ingrese el numero de párrafo (su posición en el tema seleccionado), tome en cuenta que 1 es el primero, dos el segundo...</label>
+                              <div class="col-sm-1">
+                                  <input type="text" name="no_parrafo" class="form-control" required>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Referencias bibliográficas (Formato APA)</label>
+                              <div class="col-sm-8">
+                                  <textarea class="form-control"name="referencias" aria-label="With textarea" required></textarea>
+                              </div>
+                          </div> 
+                             
+                          <div class="row mt">
+                          <label class="col-sm-2 col-sm-2 control-label">Temas</label>
+                          
+          		<div class="col-lg-4">
+          			<div class="form-panel">
+                      
+                      <select class="form-control" name="temas" required>
+                      <?php
+              while ($fila=$resultado->fetch_assoc()) {?> 
+  <option value="<?php echo $fila['idtema'] ?>"><?php echo $fila['tema']  ?></option>
+                <?php
+                }
+             
+              ?>
+						</select>
+    </div>
+    </div>
+    </div>
+   <button type="submit" class="btn btn-theme">Guardar</button>
+                          
+                      </form>
+                  </div>
+          		</div><!-- col-lg-12-->      	
+          	</div><!-- /row -->
 			
 		</section><! --/wrapper -->
       </section><!-- /MAIN CONTENT -->

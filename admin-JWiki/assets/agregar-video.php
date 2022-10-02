@@ -1,6 +1,6 @@
 <?php
 include('conexion/conexion.php');
-session_start();
+session_start(); //verificar si hay usuario logueado
 if(!isset($_SESSION['idusuario'])){
 header("Location:../../login.php");
 }
@@ -9,6 +9,30 @@ $iduser=$_SESSION['idusuario'];
 $sql="SELECT usuario,nombreR FROM usuario WHERE idusuario='$iduser'";
 $resultado=$conexion->query($sql);
 $row=$resultado->fetch_assoc();//array asociativo
+
+//para primer formulario
+$sql="SELECT idtema,tema FROM tema";
+$resultado=$conexion->query($sql);
+
+//insertar video
+ if(!empty($_POST)){
+         $temas = mysqli_real_escape_string($conexion,$_POST['temas']);
+         $titulo = mysqli_real_escape_string($conexion,$_POST['titulo']);
+         $ruta_video = mysqli_real_escape_string($conexion,$_POST['ruta_video']);
+         $sqlvideo = "INSERT INTO video(titulo,ruta_video,idtema) VALUES ('$titulo','$ruta_video','$temas')";
+         $resultadovideo=$conexion->query($sqlvideo);
+
+         if ($resultadovideo>0) {
+             echo "<script>
+ alert('Registro de vídeo exitoso');
+ window.location='agregar-vid-cod.php';</script>";
+         }else{
+             echo "<script>
+ alert('Error al registrar vídeo');
+ window.location='agregar-vid-cod.php';</script>";
+         }
+     }
+
 ?>
 
 <!DOCTYPE html>
@@ -299,7 +323,6 @@ $row=$resultado->fetch_assoc();//array asociativo
                         
                       </ul>
                   </li>
-                 
 
               </ul>
               <!-- sidebar menu end-->
@@ -313,13 +336,50 @@ $row=$resultado->fetch_assoc();//array asociativo
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper site-min-height">
-          	<h3><i class="fa fa-angle-right"></i> Blank Page</h3>
-          	<div class="row mt">
+          	<h3><i class="fa fa-angle-right"></i>Agrega vídeos o códigos de ejemplos a un tema de tu preferencia </h3>
+              <div class="row mt">
           		<div class="col-lg-12">
-          		<p>Place your content here.</p>
-          		</div>
-          	</div>
-			
+                  <div class="form-panel">
+                  	  <h4 class="mb"><i class="fa fa-angle-right"></i>Ingresar vídeo</h4>
+                      <form class="form-horizontal style-form" method="post">
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Título</label>
+                              <div class="col-sm-8">
+                                   <input type="text" name="titulo" class="form-control" required>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Link de tu vídeo( Deberás subirlo a youtube y luego pegar aquí tu enlace)</label>
+                              <div class="col-sm-8">
+                                  <textarea class="form-control"name="ruta_video" aria-label="With textarea" required></textarea>
+                              </div>
+                          </div> 
+                             
+                          <div class="row mt">
+                          <label class="col-sm-2 col-sm-2 control-label">Temas</label>
+                          
+          		<div class="col-lg-4">
+          			<div class="form-panel">
+                      
+                      <select class="form-control" name="temas" required>
+                      <?php
+              while ($fila=$resultado->fetch_assoc()) {?> 
+  <option value="<?php echo $fila['idtema'] ?>"><?php echo $fila['tema']  ?></option>
+                <?php
+                }
+             
+              ?>
+						</select>
+    </div>
+    </div>
+    </div>
+   <button type="submit" class="btn btn-theme">Guardar</button>
+                
+                      </form>
+                  </div>
+          		</div><!-- col-lg-12-->      	
+          	</div><!-- /row -->
+		
 		</section><! --/wrapper -->
       </section><!-- /MAIN CONTENT -->
 

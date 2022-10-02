@@ -9,6 +9,29 @@ $iduser=$_SESSION['idusuario'];
 $sql="SELECT usuario,nombreR FROM usuario WHERE idusuario='$iduser'";
 $resultado=$conexion->query($sql);
 $row=$resultado->fetch_assoc();//array asociativo
+
+//$sql="SELECT idrol,rol FROM rol";
+$sql="SELECT idtema,tema FROM tema";
+$resultado=$conexion->query($sql);
+ if(!empty($_POST)){
+         $temas = mysqli_real_escape_string($conexion,$_POST['temas']);
+         $subtema = mysqli_real_escape_string($conexion,$_POST['subtema']);
+         $descripcion = mysqli_real_escape_string($conexion,$_POST['descripcion']);
+         $no_subtema = mysqli_real_escape_string($conexion,$_POST['no_subtema']);
+         $sqlsubtema = "INSERT INTO subtema(subtema,no_subtema,descripcion,idtema) VALUES ('$subtema','$no_subtema','$descripcion','$temas')";
+         $resultadosubtema=$conexion->query($sqlsubtema);
+
+         if ($resultadosubtema>0) {
+             echo "<script>
+ alert('Registro de subtema exitoso');
+ window.location='agregar-subtema.php';</script>";
+         }else{
+             echo "<script>
+ alert('Error al registrar subtema');
+ window.location='agregar-subtema.php';</script>";
+         }
+     }
+ 
 ?>
 
 <!DOCTYPE html>
@@ -299,8 +322,6 @@ $row=$resultado->fetch_assoc();//array asociativo
                         
                       </ul>
                   </li>
-                 
-
               </ul>
               <!-- sidebar menu end-->
           </div>
@@ -313,12 +334,72 @@ $row=$resultado->fetch_assoc();//array asociativo
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper site-min-height">
-          	<h3><i class="fa fa-angle-right"></i> Blank Page</h3>
-          	<div class="row mt">
+          	<h3><i class="fa fa-angle-right"></i>Agrega un subtema a un tema de tu preferencia </h3>
+              <div class="row mt">
           		<div class="col-lg-12">
-          		<p>Place your content here.</p>
-          		</div>
-          	</div>
+                  <div class="form-panel">
+                  	  <h4 class="mb"><i class="fa fa-angle-right"></i>Ingresa un subtema </h4>
+                      <form class="form-horizontal style-form" method="post">
+                      <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Subtema</label>
+                              <div class="col-sm-8">
+                              <input type="text" name="subtema" class="form-control" required>
+                              </div>
+                          </div>
+                         <div class="form-group">
+                         <label class="col-sm-2 col-sm-2 control-label">Subtema(descripción)</label>
+                              <div class="col-sm-8">
+                                  <textarea class="form-control"name="descripcion" aria-label="With textarea" required></textarea>
+                              </div>
+                         </div> 
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Ingrese el número de subtema (que lugar tiene dentro de la página), tome en cuenta que 1 es el primero, dos el segundo...</label>
+                              <div class="col-sm-1">
+                                  <input type="text" name="no_subtema" class="form-control" required>
+                              </div>
+                          </div>
+<!-- 
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Subpárrafo</label>
+                              <div class="col-sm-8">
+                                  <textarea class="form-control"name="subparrafo" aria-label="With textarea" required></textarea>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Ingrese el numero de subpárrafo (su posición en el tema seleccionado), tome en cuenta que 1 es el primero, dos el segundo...</label>
+                              <div class="col-sm-1">
+                                  <input type="text" name="no_subparrafo" class="form-control" required>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Referencias bibliográficas (Formato APA)</label>
+                              <div class="col-sm-8">
+                                  <textarea class="form-control"name="referencias" aria-label="With textarea" required></textarea>
+                              </div>
+                          </div>  -->
+                          <div class="row mt">
+                          <label class="col-sm-2 col-sm-2 control-label">Temas</label>
+          		<div class="col-lg-4">
+          			<div class="form-panel">
+                      
+                      <select class="form-control" name="temas" required>
+                      <?php
+              while ($fila=$resultado->fetch_assoc()) {?> 
+  <option value="<?php echo $fila['idtema'] ?>"><?php echo $fila['tema']  ?></option>
+                <?php
+                }
+             
+              ?>
+						</select>
+    </div>
+    </div>
+    </div>
+    <button type="submit" class="btn btn-theme">Guardar</button>
+                          
+                      </form>
+                  </div>
+          		</div><!-- col-lg-12-->      	
+          	</div><!-- /row -->
 			
 		</section><! --/wrapper -->
       </section><!-- /MAIN CONTENT -->

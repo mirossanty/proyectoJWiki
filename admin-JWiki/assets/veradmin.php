@@ -12,7 +12,8 @@ $row=$resultado->fetch_assoc();//array asociativo
 
 $sql="SELECT idrol,rol FROM rol";
 $resultado=$conexion->query($sql);
-$usuarios= "SELECT idusuario,usuario,contrasena,idrol,nombreR,apellidos,email,profesion FROM usuario";
+$usuarios= "SELECT usuario.idusuario,usuario.contrasena,usuario.usuario,usuario.nombreR,usuario.apellidos,usuario.email,usuario.profesion, rol.rol
+FROM usuario as usuario inner join rol as rol on usuario.idrol= rol.idrol;";
 $resultadousuario = $conexion->query($usuarios);
 
 
@@ -266,6 +267,19 @@ $resultadousuario = $conexion->query($usuarios);
                           
                       </ul>
                   </li>
+                  <li class="sub-menu">
+                      <a href="javascript:;">
+                          <i class="fa fa-dashboard"></i>
+                          <span>Contenido JWiki</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="ver-parrafo.php">Ver párrafos agregados</a></li>
+                          <li><a  href="ver-subtema.php">Ver subtemas agregados</a></li>
+                          <li><a  href="ver-subparrafo.php">Ver subparrafos agregados</a></li>
+                          <li><a  href="ver-video.php">Ver vídeos agregados</a></li>
+                          <li><a  href="ver-codigo.php">Ver códigos agregados</a></li>
+                      </ul>
+                  </li>
                   <?php } ?>
                   <li class="sub-menu">
                       <a href="javascript:;" >
@@ -276,27 +290,20 @@ $resultadousuario = $conexion->query($usuarios);
                           <li><a  href="perfil.php">Ver mi perfil</a></li>
                       </ul>
                   </li>
-                  <!-- <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-th"></i>
-                          <span>Data Tables</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="basic_table.html">Basic Table</a></li>
-                          <li><a  href="responsive_table.html">Responsive Table</a></li>
-                      </ul>
-                  </li>
                   <li class="sub-menu">
                       <a href="javascript:;" >
-                          <i class=" fa fa-bar-chart-o"></i>
-                          <span>Charts</span>
+                          <i class="fa fa-th"></i>
+                          <span>Contenido JWiki</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="morris.html">Morris</a></li>
-                          <li><a  href="chartjs.html">Chartjs</a></li>
+                          <li><a  href="contenidoJWiki/agregarParrafo.php">Agregar un párrafo</a></li>
+                          <li><a  href="contenidoJWiki/agregar-subtema.php">Agregar un subtema</a></li>
+                          <li><a  href="contenidoJWiki/agregar-subparrafo.php">Agregar un subparrafo</a></li>
+                          <li><a  href="contenidoJWiki/agregar-video.php">Agregar un video</a></li>
+                          <li><a  href="contenidoJWiki/agregar-codigo.php">Agregar código</a></li>
+                        
                       </ul>
-                  </li> -->
-
+                  </li>
               </ul>
               <!-- sidebar menu end-->
           </div>
@@ -328,6 +335,7 @@ $resultadousuario = $conexion->query($usuarios);
                                   <th><i class="fa fa-bookmark"></i> Email</th>
                                   <th><i class=" fa fa-edit"></i> Profesión</th>
                                   <th><i class="fa fa-bookmark"></i> Usuario</th>
+                                  <th><i class="fa fa-bookmark"></i> Rol</th>
                                   <th></th>
                               </tr>
                               </thead>
@@ -341,6 +349,7 @@ $resultadousuario = $conexion->query($usuarios);
                                 <td>".$regUsuarios['email']."</td>
                                 <td>".$regUsuarios['profesion']."</td>
                                 <td>".$regUsuarios['usuario']."</td>
+                                <td>".$regUsuarios['rol']."</td>
                                 <td><span class='label label-info label-mini'></span></td>
                                 <td><a class='btn btn-primary' href='editaradmin.php?idusuario=".$regUsuarios['idusuario']."' role='button'>Editar✏️</a></td>
                                 <td><a class='btn btn-danger' href='eliminaradmin.php?idusuario=".$regUsuarios['idusuario']."' role='button'>🗑️</a></td>

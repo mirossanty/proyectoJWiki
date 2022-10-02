@@ -261,6 +261,19 @@ $row=$resultado->fetch_assoc();//array asociativo
                           
                       </ul>
                   </li>
+                  <li class="sub-menu">
+                      <a href="javascript:;">
+                          <i class="fa fa-dashboard"></i>
+                          <span>Contenido JWiki</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="ver-parrafo.php">Ver párrafos agregados</a></li>
+                          <li><a  href="ver-subtema.php">Ver subtemas agregados</a></li>
+                          <li><a  href="ver-subparrafo.php">Ver subparrafos agregados</a></li>
+                          <li><a  href="ver-video.php">Ver vídeos agregados</a></li>
+                          <li><a  href="ver-codigo.php">Ver códigos agregados</a></li>
+                      </ul>
+                  </li>
                   <?php
                     }
                   ?>
@@ -273,26 +286,20 @@ $row=$resultado->fetch_assoc();//array asociativo
                           <li><a  href="perfil.php">Ver mi perfil</a></li>
                       </ul>
                   </li>
-                  <!-- <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-th"></i>
-                          <span>Data Tables</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="basic_table.html">Basic Table</a></li>
-                          <li><a  href="responsive_table.html">Responsive Table</a></li>
-                      </ul>
-                  </li>
                   <li class="sub-menu">
                       <a href="javascript:;" >
-                          <i class=" fa fa-bar-chart-o"></i>
-                          <span>Charts</span>
+                          <i class="fa fa-th"></i>
+                          <span>Contenido JWiki</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="morris.html">Morris</a></li>
-                          <li><a  href="chartjs.html">Chartjs</a></li>
+                          <li><a  href="agregarParrafo.php">Agregar un párrafo</a></li>
+                          <li><a  href="agregar-subtema.php">Agregar un subtema</a></li>
+                          <li><a  href="agregar-subparrafo.php">Agregar un subparrafo</a></li>
+                          <li><a  href="agregar-video.php">Agregar un video</a></li>
+                          <li><a  href="agregar-codigo.php">Agregar código</a></li>
+                        
                       </ul>
-                  </li> -->
+                  </li>
 
               </ul>
               <!-- sidebar menu end-->

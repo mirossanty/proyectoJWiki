@@ -9,6 +9,11 @@ $iduser=$_SESSION['idusuario'];
 $sql="SELECT usuario,nombreR FROM usuario WHERE idusuario='$iduser'";
 $resultado=$conexion->query($sql);
 $row=$resultado->fetch_assoc();//array asociativo
+
+$subparrafo= "SELECT subparrafo.idsubparrafo,subparrafo.subparrafo,subparrafo.no_subparrafo,subtema.subtema FROM subparrafo AS subparrafo 
+INNER JOIN subtema AS subtema ON subparrafo.idsubtema = subtema.idsubtema;";
+$resultadosubparrafo= $conexion->query($subparrafo);
+
 ?>
 
 <!DOCTYPE html>
@@ -259,6 +264,15 @@ $row=$resultado->fetch_assoc();//array asociativo
                           <li class="active"><a  href="agregaradmin.php">Agregar usuario</a></li>
                           
                       </ul>
+                      <li class="sub-menu">
+                      <a href="javascript:;">
+                          <i class="fa fa-dashboard"></i>
+                          <span>Contenido JWiki</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="ver-parrafo.php">Ver párrafos agregados</a></li>
+                      </ul>
+                  </li>
                   </li>
                   <li class="sub-menu">
                       <a href="javascript:;">
@@ -299,8 +313,6 @@ $row=$resultado->fetch_assoc();//array asociativo
                         
                       </ul>
                   </li>
-                 
-
               </ul>
               <!-- sidebar menu end-->
           </div>
@@ -313,12 +325,49 @@ $row=$resultado->fetch_assoc();//array asociativo
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper site-min-height">
-          	<h3><i class="fa fa-angle-right"></i> Blank Page</h3>
+          	<!-- <h3><i class="fa fa-angle-right"></i> Blank Page</h3>
           	<div class="row mt">
           		<div class="col-lg-12">
           		<p>Place your content here.</p>
           		</div>
-          	</div>
+          	</div> -->
+              <div class="row mt">
+                  <div class="col-md-12">
+                      <div class="content-panel">
+                          <table class="table table-striped table-advance table-hover">
+	                  	  	  <h4><i class="fa fa-angle-right"></i>Lista de subparrafos registrados</h4>
+	                  	  	  <hr>
+                              <thead>
+                              <tr>
+                                  <th><i class="fa fa-bullhorn"></i>Subparrafo</th>
+                                  <th class="hidden-phone"><i class="fa fa-question-circle"></i>No.subparrafo</th>
+                                  <th><i class="fa fa-bookmark"></i>Subtema</th>
+                                  
+                                  <th></th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              
+                               <?php
+                               while ($regsubparrafo=$resultadosubparrafo->fetch_array(MYSQLI_BOTH)) {
+                                echo "<tr>
+                                <td>".$regsubparrafo['subparrafo']."</td>
+                                <td>".$regsubparrafo['no_subparrafo']."</td>
+                                <td>".$regsubparrafo['subtema']."</td>
+                                <td><span class='label label-info label-mini'></span></td>
+                                <td><a class='btn btn-primary' href='editar-subparrafo.php?idsubparrafo=".$regsubparrafo['idsubparrafo']."' role='button'>Editar✏️</a></td>
+
+                                <td><a class='btn btn-danger' href='eliminar-subparrafo.php?idsubparrafo=".$regsubparrafo['idsubparrafo']."' role='button'>🗑️</a></td>
+                                
+                            </tr>";
+                               }
+                               ?> 
+                              
+                              </tbody>
+                          </table>
+                      </div><!-- /content-panel -->
+                  </div><!-- /col-md-12 -->
+              </div><!-- /row -->
 			
 		</section><! --/wrapper -->
       </section><!-- /MAIN CONTENT -->

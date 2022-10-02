@@ -9,8 +9,16 @@ $iduser=$_SESSION['idusuario'];
 $sql="SELECT usuario,nombreR FROM usuario WHERE idusuario='$iduser'";
 $resultado=$conexion->query($sql);
 $row=$resultado->fetch_assoc();//array asociativo
-?>
 
+$sql="SELECT idsubtema,subtema FROM subtema";
+$resultado=$conexion->query($sql);
+
+$ID = $_GET['idsubparrafo']; //obtener id de url
+$subparrafo= "SELECT idsubparrafo,subparrafo,no_subparrafo,idsubtema FROM subparrafo WHERE idsubparrafo = '$ID'";
+$resultadosubparrafo = $conexion->query($subparrafo);
+$fila= $resultadosubparrafo->fetch_assoc();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -273,9 +281,7 @@ $row=$resultado->fetch_assoc();//array asociativo
                           <li><a  href="ver-codigo.php">Ver códigos agregados</a></li>
                       </ul>
                   </li>
-                  <?php
-                    }
-                  ?>
+                  <?php } ?>
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-tasks"></i>
@@ -299,8 +305,6 @@ $row=$resultado->fetch_assoc();//array asociativo
                         
                       </ul>
                   </li>
-                 
-
               </ul>
               <!-- sidebar menu end-->
           </div>
@@ -313,13 +317,81 @@ $row=$resultado->fetch_assoc();//array asociativo
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper site-min-height">
-          	<h3><i class="fa fa-angle-right"></i> Blank Page</h3>
+          	<!-- <h3><i class="fa fa-angle-right"></i> Blank Page</h3>
           	<div class="row mt">
           		<div class="col-lg-12">
           		<p>Place your content here.</p>
           		</div>
-          	</div>
-			
+          	</div> -->
+				<!-- BASIC FORM ELELEMNTS -->
+                <div class="row mt">
+          		<div class="col-lg-12">
+                  <div class="form-panel">
+                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Modificar subtemas</h4>
+                      <form action="<?php $_SERVER["PHP_SELF"]?>" class="form-horizontal style-form"  method="POST">
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Subparrafo</label>
+                              <div class="col-sm-8">
+                              <input type="text"class="form-control"name="subparrafo" value="<?php echo $fila['subparrafo']; ?>" required>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">NO.subparrafo</label>
+                              <div class="col-sm-4">
+                                  <input type="text" name="no_subparrafo" class="form-control" value="<?php echo $fila['no_subparrafo']; ?>"required>
+                              </div>
+                          </div>
+                             
+                          <div class="row mt">
+                          <label class="col-sm-2 col-sm-2 control-label">Subtemas</label>
+                          
+          		<div class="col-lg-4">
+          			<div class="form-panel">
+                      
+                      <select class="form-control" name="subtemas" required>
+                      <?php
+              while ($fila=$resultado->fetch_assoc()) {?> 
+  <option value="<?php echo $fila['idsubtema'] ?>"><?php echo $fila['subtema']  ?></option>
+                <?php
+                }
+             
+              ?>
+						</select>
+    </div>
+    </div>
+    </div>
+               
+                          <input class="form-control" type="hidden" name="ID" value="<?php echo $ID; ?>">
+    <button type="submit" name="editar" class="btn btn-theme">Editar</button>
+                          
+                      </form>
+                      <?php
+if (isset($_POST["editar"])) {
+  $subparrafo = $_POST['subparrafo'];
+  $no_subparrafo = $_POST['no_subparrafo'];
+  $subtemas= $_POST['subtemas'];
+  $id= $_POST['ID'];
+  $sqlmodificar = "UPDATE subparrafo SET
+  subparrafo= '$subparrafo',
+  no_subparrafo= '$no_subparrafo',
+  idsubtema= '$subtemas'
+   WHERE idsubparrafo= '$id'";
+  $modificado = $conexion->query($sqlmodificar);
+  if ($modificado>0) {
+    echo "<script>
+  alert('Registro editado exitosamente');
+  window.location='ver-subparrafo.php';</script>";
+  }else{
+    echo "<script>
+    alert('Error al modificar');
+    window.location='ver-subparrafo.php';</script>";
+  }
+}
+
+?>
+                  </div>
+          		</div><!-- col-lg-12-->      	
+          	</div><!-- /row -->
 		</section><! --/wrapper -->
       </section><!-- /MAIN CONTENT -->
 
@@ -327,7 +399,7 @@ $row=$resultado->fetch_assoc();//array asociativo
       <!--footer start-->
       <footer class="site-footer">
           <div class="text-center">
-              2022 - JWiki- UTSV 
+          2022 - JWiki- UTSV 
               <a href="blank.html#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
@@ -335,10 +407,9 @@ $row=$resultado->fetch_assoc();//array asociativo
       </footer>
       <!--footer end-->
   </section>
-
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <!-- <script src="js/sweetalert.js"></script> -->
     <!-- js placed at the end of the document so the pages load faster -->
-    <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-     <script src="js/sweetalert.js"></script> -->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
@@ -364,3 +435,5 @@ $row=$resultado->fetch_assoc();//array asociativo
 
   </body>
 </html>
+
+

@@ -12,8 +12,6 @@ if(!isset($_SESSION['nombre'])){
 include 'php/conexion_be.php';
 $sentencia =$bd->query("SELECT * FROM nivel;");
 $niveles = $sentencia->fetchAll(PDO::FETCH_OBJ);
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -185,7 +183,7 @@ $niveles = $sentencia->fetchAll(PDO::FETCH_OBJ);
 
                   <div class="card-footer text-muted bg-tittle border-dark">
                         <!-- esto solo lo vera el colaborador -->
-                        <a href="#" class="btn btn-primary">Modificar</a>
+                        <!-- <a href="#" class="btn btn-primary">Modificar</a> -->
                   </div> 
                 </div>
                 <br>

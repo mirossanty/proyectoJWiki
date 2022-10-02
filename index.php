@@ -30,7 +30,7 @@
 
        <main>
            <section class="presentation container">
-            <img src="img/logo.png" class="presentation__picture" alt="">
+            <img src="img/logo.jpeg" class="presentation__picture" alt="">
             <!-- <img src="img/Javalogo.png" class="presentation__picture" alt=""> -->
          <h2 class="subtitle">Jwiki es un sitio web dedicado al lenguaje Java</h2>
          <p class="presentation__copy"> Para comenzar a ver el todo el contenido da clic en el botón de abajo:</p>
@@ -44,10 +44,10 @@
                
             </div>
             <figure class="about__img">
-<img src="img/javalogo3.png" class="about__picture" alt="">
+<img src="img/javalogo3.jpeg" class="about__picture" alt="">
             </figure>
             <figure class="about__img about__img--left">
-                <img src="img/javaprogram.jpg" class="about__picture" alt="">
+                <img src="img/javaprogram.jpeg" class="about__picture" alt="">
                             </figure>
 
                             <div class="about__text">
@@ -62,7 +62,7 @@
             <div class="imagenes__grid">
 
                 <article class="img__item">
-                    <img src="img/imagen6.jpg" class="imagenes__img" alt="">
+                    <img src="img/imagen6.jpeg" class="imagenes__img" alt="">
                     <div class="img__hover">
                         <h2 class="imagenes__title">Imagen</h2>
                         <i class="fa fa-file-alt imagenes__icon"></i>
@@ -70,7 +70,7 @@
                 </article>
 
                 <article class="img__item">
-                    <img src="img/imagen4.jpg" class="imagenes__img" alt="">
+                    <img src="img/imagen4.jpeg" class="imagenes__img" alt="">
                     <div class="img__hover">
                         <h2 class="imagenes__title">Imagen</h2>
                         <i class="fa fa-file-alt imagenes__icon"></i>
@@ -78,7 +78,7 @@
                 </article>
                 
                 <article class="img__item">
-                    <img src="img/imagen3.jpg" class="imagenes__img" alt="">
+                    <img src="img/imagen3.jpeg" class="imagenes__img" alt="">
                     <div class="img__hover">
                         <h2 class="imagenes__title">Imagen</h2>
                         <i class="fa fa-file-alt imagenes__icon"></i>
@@ -86,7 +86,7 @@
                 </article>
                 
                 <article class="img__item">
-                    <img src="img/imagen1.jpg" class="imagenes__img" alt="">
+                    <img src="img/imagen1.jpeg" class="imagenes__img" alt="">
                     <div class="img__hover">
                         <h2 class="imagenes__title">Imagen</h2>
                         <i class="fa fa-file-alt imagenes__icon"></i>
@@ -94,7 +94,7 @@
                 </article>
 
                 <article class="img__item">
-                    <img src="img/imagen5.jpg" class="imagenes__img" alt="">
+                    <img src="img/imagen5.jpeg" class="imagenes__img" alt="">
                     <div class="img__hover">
                         <h2 class="imagenes__title">Imagen</h2>
                         <i class="fa fa-file-alt imagenes__icon"></i>
@@ -120,7 +120,7 @@
                 </article>
             <article class="testimony__item">
                 <div class="testimony__consejos">
-                    <img src="img/logoTic.jpg" class="testimny__img" alt="">
+                    <img src="img/logoTic.jpeg" class="testimny__img" alt="">
                     <div class="testimony__texts">
                         <h3 class="testimony__name">Visión</h3>
                         <p class="consejos__verification">Nuestra visión es: </p>
