@@ -217,7 +217,7 @@ $resultadousuario = $conexion->query($usuarios);
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
               
-              	  <p class="centered"><a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+              	  <p class="centered"><a href="#"><img src="img/ui-sam.jpg" class="img-circle" width="60"></a></p>
               	  <h5 class="centered"><?php
                   echo utf8_decode($row['nombreR']);
                   ?></h5>
@@ -327,6 +327,7 @@ $resultadousuario = $conexion->query($usuarios);
                   <div class="col-md-12">
                       <div class="content-panel">
                           <table class="table table-striped table-advance table-hover">
+                          
 	                  	  	  <h4><i class="fa fa-angle-right"></i>Lista de usuarios registrados</h4>
 	                  	  	  <hr>
                               <thead>
@@ -379,7 +380,7 @@ $resultadousuario = $conexion->query($usuarios);
       </footer>
       <!--footer end-->
   </section>
-  
+>
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>

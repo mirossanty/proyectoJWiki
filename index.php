@@ -12,8 +12,8 @@
        <header class="hero">
         <div class="container">
             <nav class="nav">
-                <a href="login.php" class="nav__items nav__items--cta">Registrarse</a>
-                <a href="contacto.php" class="nav__items nav__items--cta">Contacto</a>
+                <a href="register.php" class="nav__items nav__items--cta">Registrate</a>
+                <a href="login.php" class="nav__items nav__items--cta">Ingresa</a>
                 <a href="colaboracion.php" class="nav__items nav__items--cta">Cómo colaborar</a>
             </nav>
 
@@ -21,7 +21,7 @@
                 <div class="hero__texts">
                 <h1 class="hero__title">Bienvenido a JWiki</h1>
                 <h1 class="hero__subtitle">Al servicio de la programación</h1>
-                <a href="#" class="hero__cta">Contáctanos ahora</a>
+                <a href="mailto:jwiki.contacto@gmail.com?Subject=Contacto%20del%20sitio%20web%20JWiki"  class="hero__cta">Contáctanos ahora</a>
             </div>
             </section>
         </div>
