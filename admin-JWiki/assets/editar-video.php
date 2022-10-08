@@ -278,6 +278,7 @@ $fila= $resultadovideo->fetch_assoc();
                           <li><a  href="ver-subparrafo.php">Ver subparrafos agregados</a></li>
                           <li><a  href="ver-video.php">Ver vídeos agregados</a></li>
                           <li><a  href="ver-codigo.php">Ver códigos agregados</a></li>
+                          <li><a  href="ver-referencia.php">Ver referencias agregadas</a></li>
                       </ul>
                   </li>
                   <?php } ?>

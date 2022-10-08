@@ -271,6 +271,7 @@ $row=$resultado->fetch_assoc();//array asociativo
                           <li><a  href="ver-subparrafo.php">Ver subparrafos agregados</a></li>
                           <li><a  href="ver-video.php">Ver vídeos agregados</a></li>
                           <li><a  href="ver-codigo.php">Ver códigos agregados</a></li>
+                          <li><a  href="ver-referencia.php">Ver referencias agregadas</a></li>
                       </ul>
                   </li>
                   <?php
@@ -296,6 +297,7 @@ $row=$resultado->fetch_assoc();//array asociativo
                           <li><a  href="agregar-subparrafo.php">Agregar un subparrafo</a></li>
                           <li><a  href="agregar-video.php">Agregar un video</a></li>
                           <li><a  href="agregar-codigo.php">Agregar código</a></li>
+                          
                         
                       </ul>
                   </li>
@@ -324,7 +326,8 @@ $row=$resultado->fetch_assoc();//array asociativo
                  <p>
                         <ol>
                                 <li>En las secciones de párrafo,subtema y subparrafo está la opción de colocar el número de posición en el que queremos colocar ya sea el párrafo, subtema o subparrafo; sin embargo hay que tomar en cuenta que si la posición que elijas como colaborador esta ocupada, se colocará tu contenido en el siguiente lugar disponible. Por ejemplo si elijes la 1 y se encuentra ocupada, se colocara en el dos si se encuentra libre.</li>
-                                <li>Para colocar el link en la sección de vídeos, te sugerimos subir tu ejemplo a youtube y seguido de esto, colocar el link que se genera cuando se coloca la opcion de compartir e incrustrar como html<></li>
+                                <li>Para colocar el link en la sección de vídeos, te recomendamos subir tu ejemplo a youtube y seguido de esto, colocar el link que se genera cuando se coloca la opcion de compartir e incrustrar como html<></li>
+                                <li>Te sugerimos siempre verificar antes de guardar tu información si estas en el tema o subtema que escogiste, para evitar que se suba en otra sección que no corresponde.</li>
                                 
                         </ol>
                  </p>

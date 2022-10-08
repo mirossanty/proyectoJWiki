@@ -9,13 +9,14 @@ $iduser=$_SESSION['idusuario'];
 $sql="SELECT usuario,nombreR FROM usuario WHERE idusuario='$iduser'";
 $resultado=$conexion->query($sql);
 $row=$resultado->fetch_assoc();//array asociativo
-
-$video= "SELECT video.idvideo,video.titulo,video.ruta_video, tema.tema 
-FROM video AS video INNER JOIN tema AS tema ON video.idtema = tema.idtema;";
-$resultadovideo = $conexion->query($video);
+$sql="SELECT idtema,tema FROM tema";
+$resultado=$conexion->query($sql);
+$ID = $_GET['idreferencia']; //obtener id de url
+$referencia= "SELECT idreferencia,referencia,idtema FROM referencia WHERE idreferencia = '$ID'";
+$resultadoreferencia = $conexion->query($referencia);
+$fila= $resultadoreferencia->fetch_assoc();
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -279,9 +280,7 @@ $resultadovideo = $conexion->query($video);
                           <li><a  href="ver-referencia.php">Ver referencias agregadas</a></li>
                       </ul>
                   </li>
-                  <?php
-                    }
-                  ?>
+                  <?php } ?>
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-tasks"></i>
@@ -323,44 +322,66 @@ $resultadovideo = $conexion->query($video);
           		<p>Place your content here.</p>
           		</div>
           	</div> -->
-              <div class="row mt">
-                  <div class="col-md-12">
-                      <div class="content-panel">
-                          <table class="table table-striped table-advance table-hover">
-	                  	  	  <h4><i class="fa fa-angle-right"></i>Lista de vídeos registrados</h4>
-	                  	  	  <hr>
-                              <thead>
-                              <tr>
-                                  <th><i class="fa fa-bullhorn"></i>Título</th>
-                                  <th class="hidden-phone"><i class="fa fa-question-circle"></i>Ruta vídeo</th>
-                                  <th><i class="fa fa-bookmark"></i>Tema</th>
-                                  
-                                  <th></th>
-                              </tr>
-                              </thead>
-                              <tbody>
-                              
-                               <?php
-                               while ($regvideo=$resultadovideo->fetch_array(MYSQLI_BOTH)) {
-                                echo "<tr>
-                                <td>".$regvideo['titulo']."</td>
-                                <td>".$regvideo['ruta_video']."</td>
-                                <td>".$regvideo['tema']."</td>
-                                <td><span class='label label-info label-mini'></span></td>
-                                <td><a class='btn btn-primary' href='editar-video.php?idvideo=".$regvideo['idvideo']."' role='button'>Editar✏️</a></td>
+				<!-- BASIC FORM ELELEMNTS -->
+                <div class="row mt">
+          		<div class="col-lg-12">
+                  <div class="form-panel">
+                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Modificar referencias</h4>
+                      <form action="<?php $_SERVER["PHP_SELF"]?>" class="form-horizontal style-form"  method="POST">
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Referencias</label>
+                              <div class="col-sm-8">
+                              <input type="text"class="form-control"name="referencia" value="<?php echo $fila['referencia']; ?>" required>
+                              </div>
+                          </div> 
+                          <div class="row mt">
+                          <label class="col-sm-2 col-sm-2 control-label">Temas</label>
+                          
+          		<div class="col-lg-4">
+          			<div class="form-panel">
+                      
+                      <select class="form-control" name="temas" required>
+                      <?php
+              while ($fila=$resultado->fetch_assoc()) {?> 
+  <option value="<?php echo $fila['idtema'] ?>"><?php echo $fila['tema']  ?></option>
+                <?php
+                }
+             
+              ?>
+						</select>
+    </div>
+    </div>
+    </div>
+               
+                          <input class="form-control" type="hidden" name="ID" value="<?php echo $ID; ?>">
+    <button type="submit" name="editar" class="btn btn-theme">Editar</button>
+                          
+                      </form>
+                      <?php
+if (isset($_POST["editar"])) {
+  $referencia = $_POST['referencia'];
+  $temas= $_POST['temas'];
+  $id= $_POST['ID'];
+  $sqlmodificar = "UPDATE referencia SET
+  referencia= '$referencia',
+  idtema= '$temas'
+   WHERE idreferencia= '$id'";
+  $modificado = $conexion->query($sqlmodificar);
+  if ($modificado>0) {
+    echo "<script>
+  alert('Registro editado exitosamente');
+  window.location='ver-referencia.php';</script>";
+  }else{
+    echo "<script>
+    alert('Error al modificar');
+    window.location='ver-referencia.php';</script>";
+  }
+}
 
-                                <td><a class='btn btn-danger' href='eliminar-video.php?idvideo=".$regvideo['idvideo']."' role='button'>🗑️</a></td>
-                                
-                            </tr>";
-                               }
-                               ?> 
-                              
-                              </tbody>
-                          </table>
-                      </div><!-- /content-panel -->
-                  </div><!-- /col-md-12 -->
-              </div><!-- /row -->
-			
+?>
+                  </div>
+          		</div><!-- col-lg-12-->      	
+          	</div><!-- /row -->
 		</section><! --/wrapper -->
       </section><!-- /MAIN CONTENT -->
 
@@ -368,7 +389,7 @@ $resultadovideo = $conexion->query($video);
       <!--footer start-->
       <footer class="site-footer">
           <div class="text-center">
-              2022 - JWiki- UTSV 
+          2022 - JWiki- UTSV 
               <a href="blank.html#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
@@ -376,10 +397,9 @@ $resultadovideo = $conexion->query($video);
       </footer>
       <!--footer end-->
   </section>
-
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <!-- <script src="js/sweetalert.js"></script> -->
     <!-- js placed at the end of the document so the pages load faster -->
-    <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-     <script src="js/sweetalert.js"></script> -->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
@@ -405,3 +425,5 @@ $resultadovideo = $conexion->query($video);
 
   </body>
 </html>
+
+

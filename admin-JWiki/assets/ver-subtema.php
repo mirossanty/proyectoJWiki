@@ -263,15 +263,6 @@ $resultadosubtema= $conexion->query($subtema);
                           <li class="active"><a  href="agregaradmin.php">Agregar usuario</a></li>
                           
                       </ul>
-                      <li class="sub-menu">
-                      <a href="javascript:;">
-                          <i class="fa fa-dashboard"></i>
-                          <span>Contenido JWiki</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="ver-parrafo.php">Ver párrafos agregados</a></li>
-                      </ul>
-                  </li>
                   </li>
                   <li class="sub-menu">
                       <a href="javascript:;">
@@ -284,6 +275,7 @@ $resultadosubtema= $conexion->query($subtema);
                           <li><a  href="ver-subparrafo.php">Ver subparrafos agregados</a></li>
                           <li><a  href="ver-video.php">Ver vídeos agregados</a></li>
                           <li><a  href="ver-codigo.php">Ver códigos agregados</a></li>
+                          <li><a  href="ver-referencia.php">Ver referencias agregadas</a></li>
                       </ul>
                   </li>
                   <?php

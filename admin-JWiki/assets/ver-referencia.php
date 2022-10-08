@@ -10,9 +10,9 @@ $sql="SELECT usuario,nombreR FROM usuario WHERE idusuario='$iduser'";
 $resultado=$conexion->query($sql);
 $row=$resultado->fetch_assoc();//array asociativo
 
-$video= "SELECT video.idvideo,video.titulo,video.ruta_video, tema.tema 
-FROM video AS video INNER JOIN tema AS tema ON video.idtema = tema.idtema;";
-$resultadovideo = $conexion->query($video);
+$referencia= "SELECT referencia.idreferencia,referencia.referencia, tema.tema FROM referencia AS referencia 
+INNER JOIN tema AS tema ON referencia.idtema = tema.idtema;";
+$resultadoreferencia = $conexion->query($referencia);
 
 ?>
 
@@ -264,7 +264,6 @@ $resultadovideo = $conexion->query($video);
                           <li class="active"><a  href="agregaradmin.php">Agregar usuario</a></li>
                           
                       </ul>
-                  </li>
                   <li class="sub-menu">
                       <a href="javascript:;">
                           <i class="fa fa-dashboard"></i>
@@ -327,12 +326,11 @@ $resultadovideo = $conexion->query($video);
                   <div class="col-md-12">
                       <div class="content-panel">
                           <table class="table table-striped table-advance table-hover">
-	                  	  	  <h4><i class="fa fa-angle-right"></i>Lista de vídeos registrados</h4>
+	                  	  	  <h4><i class="fa fa-angle-right"></i>Lista de referencias registradas</h4>
 	                  	  	  <hr>
                               <thead>
                               <tr>
-                                  <th><i class="fa fa-bullhorn"></i>Título</th>
-                                  <th class="hidden-phone"><i class="fa fa-question-circle"></i>Ruta vídeo</th>
+                                  <th><i class="fa fa-bullhorn"></i>Referencia</th>
                                   <th><i class="fa fa-bookmark"></i>Tema</th>
                                   
                                   <th></th>
@@ -341,15 +339,14 @@ $resultadovideo = $conexion->query($video);
                               <tbody>
                               
                                <?php
-                               while ($regvideo=$resultadovideo->fetch_array(MYSQLI_BOTH)) {
+                               while ($regreferencia=$resultadoreferencia->fetch_array(MYSQLI_BOTH)) {
                                 echo "<tr>
-                                <td>".$regvideo['titulo']."</td>
-                                <td>".$regvideo['ruta_video']."</td>
-                                <td>".$regvideo['tema']."</td>
+                                <td>".$regreferencia['referencia']."</td>
+                                <td>".$regreferencia['tema']."</td>
                                 <td><span class='label label-info label-mini'></span></td>
-                                <td><a class='btn btn-primary' href='editar-video.php?idvideo=".$regvideo['idvideo']."' role='button'>Editar✏️</a></td>
+                                <td><a class='btn btn-primary' href='editar-referencia.php?idreferencia=".$regreferencia['idreferencia']."' role='button'>Editar✏️</a></td>
 
-                                <td><a class='btn btn-danger' href='eliminar-video.php?idvideo=".$regvideo['idvideo']."' role='button'>🗑️</a></td>
+                                <td><a class='btn btn-danger' href='eliminar-referencia.php?idreferencia=".$regreferencia['idreferencia']."' role='button'>🗑️</a></td>
                                 
                             </tr>";
                                }
