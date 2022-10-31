@@ -78,7 +78,7 @@
                 <img class="rounded-circle" src="./img/duda.png" alt="Generic placeholder image" width="140" height="140">
                 <h2>¿A&uacute;n tienes dudas?</h2>
                 <p>Si no te ha quedado claro el como realizar las colaboraciones, puedes utilizar el formulario de contacto para env&iacute;ar un mensaje y recibir atenci&oacute;n personalizada.</p>
-                <p><a class="btn btn-jwiki" href="contacto.php" role="button">Ir al formulario de contacto &raquo;</a></p>
+                <!-- <p><a class="btn btn-jwiki" href="contacto.php" role="button">Ir al formulario de contacto &raquo;</a></p> -->
             </center>
         </div>
     </div>
